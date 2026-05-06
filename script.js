@@ -34,10 +34,25 @@ setTimeout(animateTyping, 500);
 const menuBtn = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navLinks');
 if (menuBtn) {
-    menuBtn.addEventListener('click', () => {
+    menuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         navMenu.classList.toggle('show');
     });
 }
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!menuBtn.contains(e.target) && !navMenu.contains(e.target)) {
+        navMenu.classList.remove('show');
+    }
+});
+
+// Close mobile menu on window resize to larger screen
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 850) {
+        navMenu.classList.remove('show');
+    }
+});
 
 // active nav + smooth scroll
 const sections = document.querySelectorAll('section');
@@ -107,18 +122,45 @@ const servicesContainer = document.querySelector('.services-container');
 const dots = document.querySelectorAll('.dot');
 let currentSlide = 0;
 const totalSlides = 5; // 5 cards
+let isMobile = window.innerWidth <= 850;
+let autoSlideInterval;
 
 function updateSlider() {
-    const slideWidth = 250 + 32; // card width + gap
-    servicesContainer.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-    dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentSlide);
-    });
+    if (isMobile) {
+        // On mobile, use scroll-based positioning
+        const cardWidth = 200 + 16; // card width + gap
+        servicesContainer.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
+    } else {
+        const slideWidth = 250 + 32; // card width + gap
+        servicesContainer.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+    }
+
+    // Update dots visibility based on screen size
+    if (isMobile) {
+        dots.forEach(dot => dot.style.display = 'none');
+    } else {
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+            dot.style.display = 'block';
+        });
+    }
 }
 
 function nextSlide() {
-    currentSlide = (currentSlide + 1) % totalSlides;
+    if (!isMobile) {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlider();
+    }
+}
+
+function handleResize() {
+    isMobile = window.innerWidth <= 850;
     updateSlider();
+    if (isMobile) {
+        clearInterval(autoSlideInterval);
+    } else {
+        autoSlideInterval = setInterval(nextSlide, 3000);
+    }
 }
 
 dots.forEach((dot, index) => {
@@ -128,5 +170,37 @@ dots.forEach((dot, index) => {
     });
 });
 
-// auto slide every 3 seconds
-setInterval(nextSlide, 3000);
+// Touch/swipe functionality for mobile
+let startX = 0;
+let isDragging = false;
+
+servicesContainer.addEventListener('touchstart', (e) => {
+    if (!isMobile) return;
+    startX = e.touches[0].clientX;
+    isDragging = true;
+});
+
+servicesContainer.addEventListener('touchmove', (e) => {
+    if (!isMobile || !isDragging) return;
+    e.preventDefault();
+});
+
+servicesContainer.addEventListener('touchend', (e) => {
+    if (!isMobile || !isDragging) return;
+    isDragging = false;
+    const endX = e.changedTouches[0].clientX;
+    const diffX = startX - endX;
+
+    if (Math.abs(diffX) > 50) { // Minimum swipe distance
+        if (diffX > 0 && currentSlide < totalSlides - 1) {
+            currentSlide++;
+        } else if (diffX < 0 && currentSlide > 0) {
+            currentSlide--;
+        }
+        updateSlider();
+    }
+});
+
+// Initialize
+handleResize();
+window.addEventListener('resize', handleResize);
