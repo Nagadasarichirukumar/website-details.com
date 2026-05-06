@@ -599,6 +599,15 @@ footer {
         right: 0;
         z-index: 1000;
         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+    }
+
+    .nav-links.show {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
     }
 
     .nav-link {
@@ -614,6 +623,17 @@ footer {
 
     .menu-icon {
         display: block;
+        font-size: 1.6rem;
+        cursor: pointer;
+        color: #000000;
+        padding: 0.5rem;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .menu-icon:hover {
+        background: rgba(37, 99, 235, 0.1);
+        color: #2563eb;
     }
 
     .hero-container {
