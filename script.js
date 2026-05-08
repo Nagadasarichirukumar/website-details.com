@@ -1,38 +1,70 @@
+// ===== SINGLE PAGE APP NAVIGATION =====
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('section');
+const navMenu = document.getElementById('navLinks');
+const serviceRevealBtn = document.getElementById('serviceRevealBtn');
+const serviceActionButtons = document.getElementById('serviceActionButtons');
 
+// Function to show/hide sections
+function showSection(sectionId) {
+    // Hide all sections
+    sections.forEach(section => {
+        section.classList.remove('active-section');
+    });
 
-// TYPING ANIMATION for multiple roles (professional)
-const roles = ["Freelance Architect", "UI/UX Specialist", "Full‑Stack Pro", "Brand Partner"];
-let idx = 0, charIdx = 0, deleting = false;
-const roleSpan = document.getElementById("rotatingRole");
-function animateTyping() {
-    if (!roleSpan) return;
-    const currentText = roles[idx];
-    if (!deleting) {
-        roleSpan.textContent = currentText.substring(0, charIdx + 1);
-        charIdx++;
-        if (charIdx === currentText.length) {
-            deleting = true;
-            setTimeout(animateTyping, 2000);
-            return;
-        }
-    } else {
-        roleSpan.textContent = currentText.substring(0, charIdx - 1);
-        charIdx--;
-        if (charIdx === 0) {
-            deleting = false;
-            idx = (idx + 1) % roles.length;
-            setTimeout(animateTyping, 300);
-            return;
+    // Show selected section
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        targetSection.classList.add('active-section');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Update active nav link
+    navLinks.forEach(link => {
+        link.classList.remove('active-nav');
+    });
+    document.querySelector(`[data-section="${sectionId}"]`)?.classList.add('active-nav');
+
+    // Open service header options when user visits the services section
+    if (sectionId === 'services' && serviceActionButtons) {
+        serviceActionButtons.classList.remove('hidden');
+        if (serviceRevealBtn) {
+            serviceRevealBtn.textContent = 'Hide Options';
         }
     }
-    const speed = deleting ? 55 : 95;
-    setTimeout(animateTyping, speed);
-}
-setTimeout(animateTyping, 500);
 
-// mobile menu toggle
+    // Close mobile menu if open
+    if (navMenu.classList.contains('show')) {
+        navMenu.classList.remove('show');
+    }
+}
+
+// Add click event listeners to all nav links
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const sectionId = link.getAttribute('data-section');
+        showSection(sectionId);
+    });
+});
+
+// Handle nav buttons (Start Project, Explore Services, etc.)
+document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        if (btn.classList.contains('nav-btn')) {
+            const href = btn.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const sectionId = href.substring(1);
+                showSection(sectionId);
+            }
+        }
+    });
+});
+
+// ===== MOBILE MENU TOGGLE =====
 const menuBtn = document.getElementById('menuToggle');
-const navMenu = document.getElementById('navLinks');
+
 if (menuBtn) {
     menuBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -42,7 +74,7 @@ if (menuBtn) {
 
 // Close mobile menu when clicking outside
 document.addEventListener('click', (e) => {
-    if (!menuBtn.contains(e.target) && !navMenu.contains(e.target)) {
+    if (menuBtn && !menuBtn.contains(e.target) && !navMenu.contains(e.target)) {
         navMenu.classList.remove('show');
     }
 });
@@ -54,153 +86,151 @@ window.addEventListener('resize', () => {
     }
 });
 
-// active nav + smooth scroll
-const sections = document.querySelectorAll('section');
-const navAnchors = document.querySelectorAll('.nav-link');
-window.addEventListener('scroll', () => {
-    let currentActive = '';
-    sections.forEach(sec => {
-        const top = sec.offsetTop - 120;
-        if (window.scrollY >= top) currentActive = sec.getAttribute('id');
+// ===== SERVICE REVEAL BUTTON =====
+if (serviceRevealBtn && serviceActionButtons) {
+    serviceRevealBtn.addEventListener('click', () => {
+        serviceActionButtons.classList.toggle('hidden');
+        serviceRevealBtn.textContent = serviceActionButtons.classList.contains('hidden') ? 'View Process & Pricing' : 'Hide Options';
     });
-    navAnchors.forEach(link => {
-        link.classList.remove('active-nav');
-        if (link.getAttribute('href') === `#${currentActive}`) {
-            link.classList.add('active-nav');
-        }
-    });
-});
+}
 
-document.querySelectorAll('.nav-link').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            if (navMenu.classList.contains('show')) navMenu.classList.remove('show');
-        }
-    });
-});
-
-// form handling professional
+// ===== FORM HANDLING =====
 const form = document.getElementById('contactFreelanceForm');
 const feedback = document.getElementById('formMessage');
+
 if (form) {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
+        
         const nameVal = document.getElementById('fullName').value.trim();
         const emailVal = document.getElementById('emailId').value.trim();
         const messageVal = document.querySelector('textarea').value.trim();
+        
         if (!nameVal || !emailVal || !messageVal) {
             feedback.style.color = "#ffb347";
             feedback.innerText = "Please fill in all fields.";
             return;
         }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailVal)) {
+            feedback.style.color = "#ffb347";
+            feedback.innerText = "Please enter a valid email address.";
+            return;
+        }
+
         feedback.style.color = "#a3e0a0";
         feedback.innerText = "Message sent successfully! I'll get back to you soon.";
-        form.reset();
+
+        // Clear form after 2 seconds
+        setTimeout(() => {
+            form.reset();
+            feedback.innerText = "";
+        }, 2000);
     });
 }
 
-// service card animation (original CSS version)
-const serviceCards = document.querySelectorAll('.service-card');
+// ===== INTERSECTION OBSERVER FOR ANIMATIONS =====
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
+
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            const index = Array.from(serviceCards).indexOf(entry.target);
-            entry.target.style.transitionDelay = `${index * 0.15}s`;
-            entry.target.classList.add('show-card');
-            observer.unobserve(entry.target);
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
         }
     });
-}, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+}, observerOptions);
 
-serviceCards.forEach(card => observer.observe(card));
+// Observe service items and process cards for staggered animations
+document.querySelectorAll('.service-item, .process-card, .benefit-card, .project-card, .testimonial-card, .pricing-card').forEach((el, index) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = `opacity 0.6s ease-out ${index * 0.1}s, transform 0.6s ease-out ${index * 0.1}s`;
+    observer.observe(el);
+});
 
-// services slider
-const servicesContainer = document.querySelector('.services-container');
-const dots = document.querySelectorAll('.dot');
-let currentSlide = 0;
-const totalSlides = 5; // 5 cards
-let isMobile = window.innerWidth <= 850;
-let autoSlideInterval;
-
-function updateSlider() {
-    if (isMobile) {
-        // On mobile, use scroll-based positioning
-        const cardWidth = 200 + 16; // card width + gap
-        servicesContainer.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
-    } else {
-        const slideWidth = 250 + 32; // card width + gap
-        servicesContainer.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-    }
-
-    // Update dots visibility based on screen size
-    if (isMobile) {
-        dots.forEach(dot => dot.style.display = 'none');
-    } else {
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentSlide);
-            dot.style.display = 'block';
-        });
-    }
-}
-
-function nextSlide() {
-    if (!isMobile) {
-        currentSlide = (currentSlide + 1) % totalSlides;
-        updateSlider();
-    }
-}
-
-function handleResize() {
-    isMobile = window.innerWidth <= 850;
-    updateSlider();
-    if (isMobile) {
-        clearInterval(autoSlideInterval);
-    } else {
-        autoSlideInterval = setInterval(nextSlide, 3000);
-    }
-}
-
-dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => {
-        currentSlide = index;
-        updateSlider();
+// ===== LIVE PREVIEW BUTTON FUNCTIONALITY =====
+document.querySelectorAll('.live-preview-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert('Live preview link would go here. This is a demo!');
     });
 });
 
-// Touch/swipe functionality for mobile
-let startX = 0;
-let isDragging = false;
+// ===== SMOOTH SCROLL BEHAVIOR (already handled by CSS) =====
+document.documentElement.style.scrollBehavior = 'smooth';
 
-servicesContainer.addEventListener('touchstart', (e) => {
-    if (!isMobile) return;
-    startX = e.touches[0].clientX;
-    isDragging = true;
-});
+// ===== PAGE LOAD INITIALIZATION =====
+window.addEventListener('load', () => {
+    // Ensure home section is visible on page load
+    showSection('home');
+    
+    // Add staggered fade-in animation to hero elements
+    const heroElements = document.querySelectorAll('.hero-content, .hero-visual');
+    heroElements.forEach((el, index) => {
+        el.style.animation = `fadeUp 0.7s ease-out ${index * 0.2}s both`;
+    });
 
-servicesContainer.addEventListener('touchmove', (e) => {
-    if (!isMobile || !isDragging) return;
-    e.preventDefault();
-});
-
-servicesContainer.addEventListener('touchend', (e) => {
-    if (!isMobile || !isDragging) return;
-    isDragging = false;
-    const endX = e.changedTouches[0].clientX;
-    const diffX = startX - endX;
-
-    if (Math.abs(diffX) > 50) { // Minimum swipe distance
-        if (diffX > 0 && currentSlide < totalSlides - 1) {
-            currentSlide++;
-        } else if (diffX < 0 && currentSlide > 0) {
-            currentSlide--;
-        }
-        updateSlider();
+    const pageLoader = document.getElementById('pageLoader');
+    if (pageLoader) {
+        pageLoader.classList.add('hidden');
     }
+    startTypingAnimation();
 });
 
-// Initialize
-handleResize();
-window.addEventListener('resize', handleResize);
+function startTypingAnimation() {
+    const typingElement = document.getElementById('typingCode');
+    if (!typingElement) return;
+
+    const codeLines = [
+        "const project = 'Modern Website';",
+        "const goal = 'Business Growth';",
+        "function buildSite() {",
+        "  return `${project} for ${goal}`;",
+        "}",
+        "buildSite();"
+    ];
+
+    let lineIndex = 0;
+    let charIndex = 0;
+    typingElement.textContent = '';
+
+    function typeNextChar() {
+        if (lineIndex >= codeLines.length) {
+            const cursor = document.createElement('span');
+            cursor.className = 'code-cursor';
+            typingElement.appendChild(cursor);
+            return;
+        }
+
+        const currentLine = codeLines[lineIndex];
+        if (charIndex < currentLine.length) {
+            typingElement.textContent += currentLine[charIndex];
+            charIndex++;
+            setTimeout(typeNextChar, 60);
+        } else {
+            typingElement.textContent += '\n';
+            lineIndex++;
+            charIndex = 0;
+            setTimeout(typeNextChar, 300);
+        }
+    }
+
+    typeNextChar();
+}
+
+// ===== UTILITY: Prevent form submission on Enter in textarea =====
+const textarea = document.querySelector('textarea');
+if (textarea) {
+    textarea.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            form.dispatchEvent(new Event('submit'));
+        }
+    });
+}
