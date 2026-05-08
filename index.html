@@ -6,18 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Chiru Kumar | Freelance Professional</title>
   <!-- Google Fonts + Font Awesome 6 -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-
-
-
   <!-- navigation bar with logo + home, about us, services, contact -->
   <nav class="glass-nav">
     <div class="nav-container">
@@ -32,10 +26,11 @@
         </div>
       </div>
       <div class="nav-links" id="navLinks">
-        <a href="#home" class="nav-link active-nav">Home</a>
-        <a href="#about" class="nav-link">About Us</a>
-        <a href="#services" class="nav-link">services</a>
-        <a href="#contact" class="nav-link">Contact</a>
+        <a href="#home" class="nav-link active-nav" data-section="home">Home</a>
+        <a href="#about" class="nav-link" data-section="about">About Us</a>
+        <a href="#why-choose-us" class="nav-link" data-section="why-choose-us">Why Choose Us</a>
+        <a href="#services" class="nav-link" data-section="services">Services</a>
+        <a href="#contact" class="nav-link" data-section="contact">Contact</a>
       </div>
       <div class="menu-icon" id="menuToggle">
         <i class="fas fa-bars"></i>
@@ -44,24 +39,26 @@
   </nav>
 
   <main>
-    <!-- section -->
-    <section id="home">
+    <!-- HOME section -->
+    <section id="home" class="active-section">
       <div class="container hero-container">
         <div class="hero-content">
-          <h1 class="hero-title">I'm <span class="highlight-name">Chiru Kumar</span><br>
-            <span class="dynamic-wrapper">Your <span id="rotatingRole" class="dynamic-role">Creative
-                Partner</span></span>
-          </h1>
-          <p class="hero-desc">Crafting high-end responsive websites, scalable backends, and modern brand experiences.
-            Let's build something remarkable together.</p>
+          <h1 class="hero-title">We Build Modern Websites<br>For Your Business Growth</h1>
+          <p class="hero-desc">We create modern, fast, responsive, and business-focused websites that help brands grow online.</p>
           <div class="section-tag" style="display: inline-block;">🚀 Premium Freelance Solutions</div>
           <div class="hero-buttons">
-            <a href="#contact" class="btn-primary">Start Project <i class="fas fa-arrow-right"></i></a>
-            <a href="#services" class="btn-outline">Explore Services <i class="fas fa-briefcase"></i></a>
+            <a href="#contact" class="btn-primary nav-btn">Start Project <i class="fas fa-arrow-right"></i></a>
+            <a href="#services" class="btn-outline nav-btn">Explore Services <i class="fas fa-briefcase"></i></a>
           </div>
         </div>
         <div class="hero-visual">
           <img src="images/home.png" alt="Workspace Setup">
+          <div class="code-terminal">
+            <div class="code-terminal-bar">
+              <span></span><span></span><span></span>
+            </div>
+            <pre id="typingCode"></pre>
+          </div>
         </div>
       </div>
     </section>
@@ -75,9 +72,7 @@
         </div>
         <div class="about-grid">
           <div class="about-text">
-            <p><strong>Chiru Kumar</strong> – I'm a dedicated freelancer with deep expertise in full-stack development,
-              modern UI/UX, and performance-driven web apps. Over 7+ years, I’ve delivered 120+ successful projects for
-              global clients.</p>
+            <p><strong>Chiru Kumar</strong> – We are a passionate web development team focused on creating professional and modern websites for businesses, startups, and personal brands.</p>
             <p>My philosophy blends stunning aesthetics with bulletproof functionality. Every website I build is
               responsive, future-proof, and tailored to elevate your brand.</p>
             <div class="skills-wrap">
@@ -87,7 +82,7 @@
               <span class="skill-tag">UI/UX Strategy</span>
               <span class="skill-tag">WordPress / Headless</span>
             </div>
-            <a href="#contact" class="btn-primary sm-btn" style="padding:0.7rem 1.6rem;">Hire Me <i
+            <a href="#contact" class="btn-primary sm-btn nav-btn" style="padding:0.7rem 1.6rem;">Hire Me <i
                 class="fas fa-user-check"></i></a>
           </div>
           <div class="about-stats-card" style="padding: 0; background: transparent; border: none; box-shadow: none;">
@@ -98,86 +93,422 @@
       </div>
     </section>
 
-    <!-- FREELANCING section (main services) -->
+    <!-- SERVICES section (redesigned with alternating layout) -->
     <section id="services">
       <div class="container">
         <div class="section-header">
           <span class="section-tag">Freelancing Expertise</span>
           <h2 class="section-title">High-impact <span class="accent">digital services</span> for your business</h2>
         </div>
-        <div class="services-slider">
-          <div class="services-container">
-          <div class="service-card">
-            <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
-            <h3>Custom Development</h3>
-            <p>Fully custom websites, web apps & portals.</p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon"><i class="fas fa-cart-shopping"></i></div>
-            <h3>E‑Commerce expert</h3>
-            <p>Shopify, WooCommerce, custom carts with secure payments.</p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon"><i class="fas fa-briefcase"></i></div>
-            <h3>Portfolios</h3>
-            <p>Stunning, customized digital portfolios to showcase your work.</p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon"><i class="fas fa-palette"></i></div>
-            <h3>Creative UI/UX</h3>
-            <p>Modern, user-first interactive designs that convert.</p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon"><i class="fas fa-code"></i></div>
-            <h3>I Can Develop</h3>
-            <p>Custom coding and development for your unique needs.</p>
+        <div class="service-action">
+          <button id="serviceRevealBtn" class="btn-primary">View Process & Pricing</button>
+          <div class="service-action-buttons hidden" id="serviceActionButtons">
+            <a href="#process" class="btn-outline nav-btn">Process</a>
+            <a href="#pricing" class="btn-outline nav-btn">Pricing</a>
           </div>
         </div>
-        <div class="slider-dots">
-          <span class="dot active" data-slide="0"></span>
-          <span class="dot" data-slide="1"></span>
-          <span class="dot" data-slide="2"></span>
-          <span class="dot" data-slide="3"></span>
-          <span class="dot" data-slide="4"></span>
-        </div>
-        <div class="mini-portfolio" style="margin-top: 2.5rem;">
-          <div class="port-card"><i class="fas fa-check-circle" style="color:#ffb347;"></i> <strong>50+
-              Websites</strong><br>Launched globally</div>
-          <div class="port-card"><i class="fas fa-rocket"></i> <strong>100% Responsive</strong><br>Flawless on any
-            device</div>
-          <div class="port-card"><i class="fas fa-headset"></i> <strong>Priority Support</strong><br>Dedicated
-            freelancer care</div>
+        <div class="services-grid">
+          <!-- Service 1: Website Development - Image Left -->
+          <div class="service-item service-left">
+            <div class="service-image">
+              <img src="images/website development.png" alt="Website Development">
+            </div>
+            <div class="service-content">
+              <h3>Website Development</h3>
+              <div class="service-points">
+                <div class="point"><span class="dot">•</span> Custom-coded websites</div>
+                <div class="point"><span class="dot">•</span> Responsive design</div>
+                <div class="point"><span class="dot">•</span> Fast loading speed</div>
+                <div class="point"><span class="dot">•</span> SEO optimized</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service 2: Business Websites - Image Right -->
+          <div class="service-item service-right">
+            <div class="service-image">
+              <img src="images/business website.png" alt="Business Websites">
+            </div>
+            <div class="service-content">
+              <h3>Business Websites</h3>
+              <div class="service-points">
+                <div class="point"><span class="dot">•</span> Professional branding</div>
+                <div class="point"><span class="dot">•</span> Lead generation</div>
+                <div class="point"><span class="dot">•</span> Contact forms</div>
+                <div class="point"><span class="dot">•</span> Business analytics</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service 3: Portfolio Websites - Image Left -->
+          <div class="service-item service-left">
+            <div class="service-image">
+              <img src="images/portfolio website.png" alt="Portfolio Websites">
+            </div>
+            <div class="service-content">
+              <h3>Portfolio Websites</h3>
+              <div class="service-points">
+                <div class="point"><span class="dot">•</span> Showcase your work</div>
+                <div class="point"><span class="dot">•</span> Professional gallery</div>
+                <div class="point"><span class="dot">•</span> Case studies</div>
+                <div class="point"><span class="dot">•</span> Client testimonials</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service 4: E-Commerce Websites - Image Right -->
+          <div class="service-item service-right">
+            <div class="service-image">
+              <img src="images/e-commerce website.png" alt="E-Commerce Websites">
+            </div>
+            <div class="service-content">
+              <h3>E-Commerce Websites</h3>
+              <div class="service-points">
+                <div class="point"><span class="dot">•</span> Shopping cart setup</div>
+                <div class="point"><span class="dot">•</span> Payment gateways</div>
+                <div class="point"><span class="dot">•</span> Product management</div>
+                <div class="point"><span class="dot">•</span> Inventory tracking</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service 5: Landing Pages - Image Left -->
+          <div class="service-item service-left">
+            <div class="service-image">
+              <img src="images/landing pages.png" alt="Landing Pages">
+            </div>
+            <div class="service-content">
+              <h3>Landing Pages</h3>
+              <div class="service-points">
+                <div class="point"><span class="dot">•</span> High conversion rates</div>
+                <div class="point"><span class="dot">•</span> A/B testing</div>
+                <div class="point"><span class="dot">•</span> Lead capture forms</div>
+                <div class="point"><span class="dot">•</span> Email integration</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service 6: UI/UX Design - Image Right -->
+          <div class="service-item service-right">
+            <div class="service-image">
+              <img src="images/uiux designs.png" alt="UI/UX Design">
+            </div>
+            <div class="service-content">
+              <h3>UI/UX Design</h3>
+              <div class="service-points">
+                <div class="point"><span class="dot">•</span> User research</div>
+                <div class="point"><span class="dot">•</span> Wireframing</div>
+                <div class="point"><span class="dot">•</span> Prototyping</div>
+                <div class="point"><span class="dot">•</span> Usability testing</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service 7: SEO Optimization - Image Left -->
+          <div class="service-item service-left">
+            <div class="service-image">
+              <img src="images/seo optimization.png" alt="SEO Optimization">
+            </div>
+            <div class="service-content">
+              <h3>SEO Optimization</h3>
+              <div class="service-points">
+                <div class="point"><span class="dot">•</span> Keyword research</div>
+                <div class="point"><span class="dot">•</span> On-page SEO</div>
+                <div class="point"><span class="dot">•</span> Technical SEO</div>
+                <div class="point"><span class="dot">•</span> Link building</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service 8: Website Maintenance - Image Right -->
+          <div class="service-item service-right">
+            <div class="service-image">
+              <img src="images/website maintaince.png" alt="Website Maintenance">
+            </div>
+            <div class="service-content">
+              <h3>Website Maintenance</h3>
+              <div class="service-points">
+                <div class="point"><span class="dot">•</span> Regular updates</div>
+                <div class="point"><span class="dot">•</span> Security monitoring</div>
+                <div class="point"><span class="dot">•</span> Performance optimization</div>
+                <div class="point"><span class="dot">•</span> Backup management</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service 9: Domain & Hosting - Image Left -->
+          <div class="service-item service-left">
+            <div class="service-image">
+              <img src="images/domain.png" alt="Domain & Hosting">
+            </div>
+            <div class="service-content">
+              <h3>Domain & Hosting Setup</h3>
+              <div class="service-points">
+                <div class="point"><span class="dot">•</span> Domain registration</div>
+                <div class="point"><span class="dot">•</span> Hosting setup</div>
+                <div class="point"><span class="dot">•</span> SSL certificate</div>
+                <div class="point"><span class="dot">•</span> Email hosting</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service 10: Google Business Profile - Image Right -->
+          <div class="service-item service-right">
+            <div class="service-image">
+              <img src="images/google.png" alt="Google Business Profile">
+            </div>
+            <div class="service-content">
+              <h3>Google Business Profile Setup</h3>
+              <div class="service-points">
+                <div class="point"><span class="dot">•</span> Profile optimization</div>
+                <div class="point"><span class="dot">•</span> Local SEO</div>
+                <div class="point"><span class="dot">•</span> Review management</div>
+                <div class="point"><span class="dot">•</span> Analytics setup</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service 11: Social Media Branding - Image Left -->
+          <div class="service-item service-left">
+            <div class="service-image">
+              <img src="images/social.png" alt="Social Media Branding">
+            </div>
+            <div class="service-content">
+              <h3>Social Media Branding</h3>
+              <div class="service-points">
+                <div class="point"><span class="dot">•</span> Brand identity design</div>
+                <div class="point"><span class="dot">•</span> Social media graphics</div>
+                <div class="point"><span class="dot">•</span> Content strategy</div>
+                <div class="point"><span class="dot">•</span> Community management</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- PROCESS section -->
+    <section id="process">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Our Workflow</span>
+          <h2 class="section-title">Working <span class="accent">Process</span></h2>
+        </div>
+        
+        <div class="process-grid">
+          <div class="process-card">
+            <div class="process-number">1</div>
+            <div class="process-icon"><i class="fas fa-comments"></i></div>
+            <h3>Requirement Discussion</h3>
+            <p>We sit down and understand your vision, goals, and requirements. Every detail matters to us.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-number">2</div>
+            <div class="process-icon"><i class="fas fa-pencil-ruler"></i></div>
+            <h3>Design Planning</h3>
+            <p>Our team creates wireframes and mockups to visualize your project before development begins.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-number">3</div>
+            <div class="process-icon"><i class="fas fa-code"></i></div>
+            <h3>Development</h3>
+            <p>We build your website using the latest technologies and best coding practices.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-number">4</div>
+            <div class="process-icon"><i class="fas fa-flask"></i></div>
+            <h3>Testing</h3>
+            <p>Rigorous testing across all devices and browsers to ensure quality and reliability.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-number">5</div>
+            <div class="process-icon"><i class="fas fa-rocket"></i></div>
+            <h3>Website Launch</h3>
+            <p>Your website goes live! We provide ongoing support and maintenance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING section -->
+    <section id="pricing">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Affordable Plans</span>
+          <h2 class="section-title">Simple & Transparent <span class="accent">Pricing</span></h2>
+        </div>
+        
+        <div style="background: rgba(37, 99, 235, 0.08); border: 1px solid rgba(37, 99, 235, 0.2); border-radius: 20px; padding: 2.5rem 2rem; margin-bottom: 3rem; text-align: center;">
+          <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem;">We can give you</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+            <div style="padding: 1rem; background: rgba(255,255,255,0.6); border-radius: 12px; font-weight: 600;"><i class="fas fa-file-lines" style="color: #2563eb; margin-right: 0.8rem;"></i>10-15 Pages Website</div>
+            <div style="padding: 1rem; background: rgba(255,255,255,0.6); border-radius: 12px; font-weight: 600;"><i class="fas fa-globe" style="color: #2563eb; margin-right: 0.8rem;"></i>1 Year Domain Free</div>
+            <div style="padding: 1rem; background: rgba(255,255,255,0.6); border-radius: 12px; font-weight: 600;"><i class="fas fa-server" style="color: #2563eb; margin-right: 0.8rem;"></i>1 Year Hosting Free</div>
+            <div style="padding: 1rem; background: rgba(255,255,255,0.6); border-radius: 12px; font-weight: 600;"><i class="fas fa-search" style="color: #2563eb; margin-right: 0.8rem;"></i>Basic SEO</div>
+            <div style="padding: 1rem; background: rgba(255,255,255,0.6); border-radius: 12px; font-weight: 600;"><i class="fas fa-headset" style="color: #2563eb; margin-right: 0.8rem;"></i>1 Year Technical Support</div>
+          </div>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Basic Plan -->
+          <div class="pricing-card">
+            <h3>Basic Website</h3>
+            <div class="price">₹4,999</div>
+            <p class="price-desc">Perfect for startups and small businesses</p>
+            <ul class="pricing-features">
+              <li><i class="fas fa-check"></i> 5-7 Pages</li>
+              <li><i class="fas fa-check"></i> Mobile Responsive</li>
+              <li><i class="fas fa-check"></i> Contact Form</li>
+              <li><i class="fas fa-check"></i> Basic SEO</li>
+              <li><i class="fas fa-check"></i> SSL Certificate</li>
+              <li><i class="fas fa-times"></i> E-Commerce</li>
+              <li><i class="fas fa-times"></i> Advanced Features</li>
+            </ul>
+            <a href="#contact" class="btn-primary full-width nav-btn">Get Started</a>
+          </div>
+
+          <!-- Professional Plan -->
+          <div class="pricing-card featured">
+            <div class="badge">POPULAR</div>
+            <h3>Professional Website</h3>
+            <div class="price">₹9,999</div>
+            <p class="price-desc">Best for established businesses</p>
+            <ul class="pricing-features">
+              <li><i class="fas fa-check"></i> 10-15 Pages</li>
+              <li><i class="fas fa-check"></i> Mobile Responsive</li>
+              <li><i class="fas fa-check"></i> Advanced Forms</li>
+              <li><i class="fas fa-check"></i> Full SEO Optimization</li>
+              <li><i class="fas fa-check"></i> Analytics Setup</li>
+              <li><i class="fas fa-check"></i> Blog Section</li>
+              <li><i class="fas fa-check"></i> Advanced Features</li>
+            </ul>
+            <a href="#contact" class="btn-primary full-width nav-btn">Get Started</a>
+          </div>
+
+          <!-- Premium Plan -->
+          <div class="pricing-card">
+            <h3>Premium Business Website</h3>
+            <div class="price">₹19,999+</div>
+            <p class="price-desc">For advanced e-commerce and dynamic websites</p>
+            <ul class="pricing-features">
+              <li><i class="fas fa-check"></i> Unlimited Pages</li>
+              <li><i class="fas fa-check"></i> Mobile Responsive</li>
+              <li><i class="fas fa-check"></i> E-Commerce Setup</li>
+              <li><i class="fas fa-check"></i> Payment Integration</li>
+              <li><i class="fas fa-check"></i> Custom Development</li>
+              <li><i class="fas fa-check"></i> Database Integration</li>
+              <li><i class="fas fa-check"></i> Premium Support</li>
+            </ul>
+            <a href="#contact" class="btn-primary full-width nav-btn">Get Started</a>
+          </div>
+        </div>
+
+        <div class="website-types">
+          <h3 style="text-align: center; margin-bottom: 2rem;">Website Types We Build</h3>
+          <div class="types-grid">
+            <div class="type-card">
+              <i class="fas fa-file-code"></i>
+              <h4>Static Website</h4>
+              <p>Fast, simple, and secure. Perfect for portfolios and informational sites.</p>
+            </div>
+            <div class="type-card">
+              <i class="fas fa-database"></i>
+              <h4>Dynamic Website</h4>
+              <p>Powerful and flexible. Database-driven for e-commerce and complex applications.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY CHOOSE US section -->
+    <section id="why-choose-us">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Our Benefits</span>
+          <h2 class="section-title">Why <span class="accent">Choose Us</span></h2>
+        </div>
+        
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon"><i class="fas fa-palette"></i></div>
+            <h3>Professional Design</h3>
+            <p>Modern, clean, and user-focused design that represents your brand beautifully.</p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon"><i class="fas fa-mobile-alt"></i></div>
+            <h3>Mobile Responsive</h3>
+            <p>Perfectly optimized for all devices - desktop, tablet, and mobile phones.</p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon"><i class="fas fa-bolt"></i></div>
+            <h3>Fast Loading</h3>
+            <p>Lightning-fast performance that improves user experience and SEO rankings.</p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon"><i class="fas fa-search"></i></div>
+            <h3>SEO Friendly</h3>
+            <p>Built with SEO best practices to help your site rank higher in search results.</p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon"><i class="fas fa-headset"></i></div>
+            <h3>24/7 Support</h3>
+            <p>Round-the-clock support to help you with any questions or issues.</p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon"><i class="fas fa-tag"></i></div>
+            <h3>Affordable Pricing</h3>
+            <p>Competitive rates without compromising on quality or features.</p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon"><i class="fas fa-lock"></i></div>
+            <h3>Secure Hosting</h3>
+            <p>Enterprise-grade security with SSL certificates and regular backups.</p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon"><i class="fas fa-hammer"></i></div>
+            <h3>Custom Development</h3>
+            <p>Tailored solutions built specifically for your unique business needs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+   
     <!-- CONTACT SECTION -->
     <section id="contact">
       <div class="container">
-        <div class="contact-wrapper">
-          <div class="contact-info">
-            <h3>Let’s bring your <span class="accent">vision</span> to life ✨</h3>
-            <p>Ready to scale your brand? I'm just a message away. Let's discuss your freelance project.</p>
-            <div class="contact-details">
-              <div><i class="fas fa-envelope"></i> ckdigitalstudio@gmail.com</div>
+        <div class="section-header">
+          <span class="section-tag">Contact</span>
+          <h2 class="section-title">Get In Touch</h2>
+        </div>
+        <div class="contact-grid" style="grid-template-columns: 1fr;">
+          <div class="contact-card glass-card contact-details-card">
+            <div class="contact-card-header">
+              <h3>Reach me directly</h3>
+              <p>Phone, email, address, and instant WhatsApp contact all in one place.</p>
+            </div>
+            <div class="contact-details-list">
               <div><i class="fas fa-phone-alt"></i> +91 89781 96619</div>
-              <div><i class="fab fa-whatsapp"></i> Freelance hotline: 24/7</div>
+              <div><i class="fas fa-envelope"></i> ckdigitalstudio@gmail.com</div>
+              <div><i class="fas fa-globe"></i> Online support available worldwide</div>
             </div>
-            <div class="social-links">
-              <a href="https://github.com/chirukumar" target="_blank"><i class="fab fa-github"></i></a>
-              <a href="https://www.linkedin.com/in/chirukumar" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#"><i class="fab fa-x-twitter"></i></a>
-            </div>
-          </div>
-          <div class="contact-form">
-            <form id="contactFreelanceForm">
-              <input type="text" placeholder="Full name" id="fullName" required>
-              <input type="email" placeholder="Email address" id="emailId" required>
-              <textarea rows="4" placeholder="Describe your freelance requirement..."></textarea>
-              <button type="submit" class="btn-primary full-width">Send message <i
-                  class="fas fa-paper-plane"></i></button>
-              <p id="formMessage" style="margin-top: 12px; font-size: 0.85rem;"></p>
-            </form>
+            <a href="https://wa.me/918978196619?text=Hello%20sir%20this%20is%20chiru%20kumar%20from%20ck%20digital%20studio" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Send WhatsApp Message
+            </a>
+           
           </div>
         </div>
       </div>
@@ -186,9 +517,44 @@
 
   <footer class="footer">
     <div class="container footer-inner">
-      <p>© 2026 Chiru Kumar | CK Digital Studio | Freelance</p>
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo">CK Digital Studio</div>
+          <p>Creative freelance web development with a focus on speed, polish, and conversion.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <a href="#home" class="nav-btn">Home</a>
+          <a href="#services" class="nav-btn">Services</a>
+          <a href="#process" class="nav-btn">Process</a>
+          <a href="#contact" class="nav-btn">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="#services" class="nav-btn">Websites</a>
+          <a href="#services" class="nav-btn">E-Commerce</a>
+          <a href="#services" class="nav-btn">UI/UX Design</a>
+          <a href="#pricing" class="nav-btn">Pricing</a>
+        </div>
+        <div class="footer-col">
+          <h4>Social</h4>
+          <div class="footer-social">
+            <a href="https://github.com/chirukumar" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/chirukumar" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://wa.me/918978196619" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom" style="justify-content: center; text-align: center;">
+        <p>© 2026 CK Digital Studio. All rights reserved.</p>
+      </div>
     </div>
   </footer>
+
+  <a href="https://wa.me/918978196619?text=Hello%20sir%20this%20is%20chiru%20kumar%20from%20ck%20digital%20studio" target="_blank" class="floating-whatsapp" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
 
   <script src="script.js"></script>
 </body>
