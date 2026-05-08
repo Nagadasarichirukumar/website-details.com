@@ -234,3 +234,132 @@ if (textarea) {
         }
     });
 }
+
+// ===== WHATSAPP AUTO-REPLY MODAL =====
+const whatsappModal = document.getElementById('whatsappModal');
+const closeWhatsappModalBtn = document.getElementById('closeWhatsappModal');
+const whatsappInput = document.getElementById('whatsappInput');
+const whatsappSendBtn = document.getElementById('whatsappSendBtn');
+const whatsappMessages = document.getElementById('whatsappMessages');
+
+const autoReplyMessage = "Hello sir this is chiru kumar from ck digital studio";
+let messageHistory = [];
+
+// Function to add a message to the chat
+function addMessage(text, isUser = false) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+    
+    const bubble = document.createElement('div');
+    bubble.className = 'message-bubble';
+    bubble.textContent = text;
+    
+    const timeSpan = document.createElement('div');
+    timeSpan.className = 'message-time';
+    const now = new Date();
+    timeSpan.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+    
+    messageDiv.appendChild(bubble);
+    messageDiv.appendChild(timeSpan);
+    whatsappMessages.appendChild(messageDiv);
+    
+    // Auto scroll to bottom
+    whatsappMessages.scrollTop = whatsappMessages.scrollHeight;
+    
+    messageHistory.push({ text, isUser, time: now });
+}
+
+// Function to show typing indicator
+function showTypingIndicator() {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message bot';
+    
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'typing-indicator';
+    typingDiv.id = 'typingIndicator';
+    
+    for (let i = 0; i < 3; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'typing-dot';
+        typingDiv.appendChild(dot);
+    }
+    
+    messageDiv.appendChild(typingDiv);
+    whatsappMessages.appendChild(messageDiv);
+    whatsappMessages.scrollTop = whatsappMessages.scrollHeight;
+}
+
+// Function to remove typing indicator
+function removeTypingIndicator() {
+    const typingDiv = document.getElementById('typingIndicator');
+    if (typingDiv) {
+        typingDiv.parentElement.remove();
+    }
+}
+
+// Open modal when WhatsApp button is clicked
+document.querySelectorAll('.btn-whatsapp, .floating-whatsapp').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        whatsappModal.classList.add('show');
+        whatsappMessages.innerHTML = '';
+        messageHistory = [];
+        
+        // Show welcome message
+        setTimeout(() => {
+            addMessage('Hi! How can I help you?');
+        }, 500);
+        
+        whatsappInput.focus();
+    });
+});
+
+// Close modal when close button is clicked
+if (closeWhatsappModalBtn) {
+    closeWhatsappModalBtn.addEventListener('click', () => {
+        whatsappModal.classList.remove('show');
+    });
+}
+
+// Close modal when clicking outside
+whatsappModal.addEventListener('click', (e) => {
+    if (e.target === whatsappModal) {
+        whatsappModal.classList.remove('show');
+    }
+});
+
+// Send message function
+function sendMessage() {
+    const message = whatsappInput.value.trim();
+    if (!message) return;
+    
+    // Add user message
+    addMessage(message, true);
+    whatsappInput.value = '';
+    whatsappSendBtn.disabled = true;
+    
+    // Show typing indicator
+    showTypingIndicator();
+    
+    // Send auto-reply after a short delay
+    setTimeout(() => {
+        removeTypingIndicator();
+        addMessage(autoReplyMessage);
+        whatsappSendBtn.disabled = false;
+    }, 1500);
+}
+
+// Send button click handler
+if (whatsappSendBtn) {
+    whatsappSendBtn.addEventListener('click', sendMessage);
+}
+
+// Send message on Enter key
+if (whatsappInput) {
+    whatsappInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+}
